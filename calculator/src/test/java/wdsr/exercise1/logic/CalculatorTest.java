@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+
+import org.junit.Assert;
 
 public class CalculatorTest {
 	private Calculator calculator;
@@ -59,5 +63,52 @@ public class CalculatorTest {
 		
 		// then
 		// empty
-	}		
+	}
+	
+	@Test
+	public void testMax_shouldReturnHighestOfAllValues(){
+		//giver
+		int [] values = {-5,-3,10};
+		//when
+		Assert.assertThat(10, is(calculator.max(values)));
+		
+	}
+	
+	@Test
+	public void testMax_shouldReturnHighestOfNegativeValues(){
+		//given
+		int [] values = {-5,-10,-20};
+		//when
+		Assert.assertThat(-5, is(calculator.max(values)));
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMax_emptyValuesTab(){
+		//given
+		int [] values = {};
+		//when
+		calculator.max(values);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMax_nullValueTab(){
+		//given
+		int [] values = null;
+		//when
+		calculator.max(values);
+	}
+	
+	@Test
+	public void testMax_shouldReturnTheOnlyValue() {
+		// given
+		int[] values = { -5 };
+		
+		// when
+		int min = calculator.min(values);
+		
+		// then
+		assertEquals(values[0], min);
+	}
+	
+	
 }
